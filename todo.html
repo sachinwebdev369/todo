@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo app</title>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+
+
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 250px;
+        }
+
+        li {
+            position: relative;
+            background-color: rgba(127, 20, 227, 0.921);
+            color: white;
+            padding: 4px 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            padding-right: 12px;
+        }
+
+        li span {
+            font-size: 14px;
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            cursor: pointer;
+        }
+
+        li span:hover {
+            color: rgb(242, 122, 122);
+        }
+        li.done {
+            background-color: rgba(175, 115, 231, 0.921);
+text-decoration: line-through;
+    color: #433d3d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fluid-container d-flex justify-content-center align-items-center bg-warning" style="height:100vh;">
+        <div class="box card w-100 mx-5 bg-light p-5" style="max-width:450px ;">
+            <h2 class="mb-4">Your tast!</h2>
+            <div>
+                <input id="task" type="text" class="w-100 ps-2 " placeholder="...">
+            </div>
+            <div class="card-body">
+                <ul id="list">
+                  
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputTask = document.getElementById('task')
+        const taskList = document.getElementById('list')
+
+        inputTask.addEventListener('keyup', (e) => {
+            console.log(e.key)
+            const value = e.key
+            if (e.key == 'Enter') {
+                addNote()
+                inputTask.value = '';
+            }
+        })
+
+
+        const addNote = () => {
+            let listItem = document.createElement('li')
+            listItem.innerHTML = `
+${inputTask.value}
+<span>X</span>
+            `
+            listItem.addEventListener('click', ()=> {
+                listItem.classList.toggle('done')
+            })
+
+            listItem.querySelector('span').addEventListener('click', () => {
+                listItem.remove()
+            })
+
+            taskList.appendChild(listItem)
+
+        }
+    </script>
+
+</body>
+
+</html>
